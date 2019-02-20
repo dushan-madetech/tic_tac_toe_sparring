@@ -7,9 +7,9 @@ describe 'Tic Tac Toe' do
 
     def save(game)
       @game_state = game
-    end 
+    end
 
-    def retrive
+    def retrieve
       @game_state
     end
   end
@@ -23,7 +23,7 @@ describe 'Tic Tac Toe' do
     game_state = [0,0,0,0,0,0,0,0,0]
     store_game_state.execute(game_state)
 
-    expect(retrieve_game_state).to eq([0,0,0,0,0,0,0,0,0])
+    expect(retrieve_game_state.execute).to eq([0,0,0,0,0,0,0,0,0])
 
   end
 end
