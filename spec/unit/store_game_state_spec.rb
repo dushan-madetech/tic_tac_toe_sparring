@@ -9,9 +9,10 @@ describe StoreGameState do
     end
   end
 
+  let (:game_state_gateway) {GameStateStorageGatewaySpy.new}
+  let (:game_state_store) {StoreGameState.new(game_state_gateway: game_state_gateway)}
+
   it 'can store a game state for an empty board' do
-    game_state_gateway = GameStateStorageGatewaySpy.new
-    game_state_store = StoreGameState.new(game_state_gateway: game_state_gateway)
     game = [0,0,0,0,0,0,0,0,0]
     game_state_store.execute(game)
     last_game = game_state_gateway.last_game_saved
@@ -19,8 +20,6 @@ describe StoreGameState do
   end
 
   it 'can store a game state for a board that has been modified by player moves' do
-    game_state_gateway = GameStateStorageGatewaySpy.new
-    game_state_store = StoreGameState.new(game_state_gateway: game_state_gateway)
     game = [1,2,1,0,0,0,2,1,2]
     game_state_store.execute(game)
     last_game = game_state_gateway.last_game_saved
@@ -28,8 +27,6 @@ describe StoreGameState do
   end
 
   it 'can overwrrite an existing game state' do
-    game_state_gateway = GameStateStorageGatewaySpy.new
-    game_state_store = StoreGameState.new(game_state_gateway: game_state_gateway)
     game = [0,0,0,0,0,0,0,0,0]
     game_state_store.execute(game)
     last_game = game_state_gateway.last_game_saved
