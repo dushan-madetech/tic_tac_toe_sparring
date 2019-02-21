@@ -16,7 +16,7 @@ Implementation of the Tic Tac Toe sparring exercise found [here](https://learn.m
 
 
 ## Authors
-Robert McHugh
+Robert McHugh   
 Dushan Despotovic
 
 
