@@ -4,7 +4,7 @@ class ModifyGameState
   end
 
   def execute(tile, player)
-    raise StandardError if tile >= 10
+    raise TileInvalidError, "Tile out of bounds" if tile >= 10
     old_board = @game_state_gateway.retrieve
     new_board = old_board
     if(new_board[tile-1] == 0)

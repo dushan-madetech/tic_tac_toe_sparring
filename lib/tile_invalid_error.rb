@@ -1,0 +1,3 @@
+class TileInvalidError < StandardError
+
+end

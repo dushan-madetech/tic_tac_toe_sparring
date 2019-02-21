@@ -1,4 +1,5 @@
  require 'modify_game_state'
+ require 'tile_invalid_error'
 
 describe ModifyGameState do
 
@@ -13,11 +14,11 @@ describe ModifyGameState do
        @last_game_saved
     end
   end
+
   
   def given_a_new_game
     game_state_gateway.last_game_saved = [0,0,0,0,0,0,0,0,0]
   end
-
 
 
   let (:game_state_gateway) { GameStateStorageGatewayFake.new }
@@ -42,7 +43,6 @@ describe ModifyGameState do
 
   it 'can prevent a move on an occupied tile' do
     given_a_new_game
-
     game_state_modify.execute(3, 1)
     game_state_modify.execute(3, 2)
     last_game = game_state_gateway.last_game_saved
@@ -52,6 +52,6 @@ describe ModifyGameState do
   it 'can prevent an invalid move (invalid tile number given)' do
     game_state_gateway = GameStateStorageGatewayFake.new
     game_state_modify = ModifyGameState.new(game_state_gateway: game_state_gateway)
-    expect{ game_state_modify.execute(10, 1) }.to raise_exception(StandardError)
+    expect{ game_state_modify.execute(10, 1) }.to raise_exception(TileInvalidError, "Tile out of bounds")
   end
 end
