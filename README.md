@@ -1,6 +1,6 @@
 # Project Title
 
-One Paragraph of project description goes here
+Implementation of the Tic Tac Toe sparring exercise found [here](https://learn.madetech.com/sparring/) on the Learn Tech website.
 
 ## Getting Started
 
@@ -16,6 +16,7 @@ One Paragraph of project description goes here
 
 
 ## Authors
-
+Robert McHugh   
+Dushan Despotovic
 
 
