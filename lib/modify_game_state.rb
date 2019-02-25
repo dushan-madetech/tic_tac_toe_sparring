@@ -10,6 +10,6 @@ class ModifyGameState
     if(new_board[tile-1] == 0)
       new_board[tile-1] = player
     end
-    return new_board
+    @game_state_gateway.save(new_board)
   end
 end
