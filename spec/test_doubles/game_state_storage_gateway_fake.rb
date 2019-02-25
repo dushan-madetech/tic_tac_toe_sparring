@@ -6,6 +6,6 @@ class GameStateStorageGatewayFake
   end
 
   def retrieve
-    @game_state
+    @game_state.dup
   end
 end

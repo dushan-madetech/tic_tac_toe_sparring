@@ -3,7 +3,7 @@
  require 'test_doubles/game_state_storage_gateway_fake'
 
 describe ModifyGameState do
-  
+
   def given_a_new_game
     game_state_gateway.game_state = [0,0,0,0,0,0,0,0,0]
   end
@@ -22,7 +22,6 @@ describe ModifyGameState do
 
   it 'can modify the game state twice in row' do
     given_a_new_game
-
     game_state_modify.execute(3, 1)
     game_state_modify.execute(4, 2)
     last_game = game_state_gateway.game_state
