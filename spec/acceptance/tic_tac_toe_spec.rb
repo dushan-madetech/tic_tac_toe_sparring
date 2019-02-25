@@ -2,26 +2,16 @@ require 'store_game_state'
 require'retrieve_game_state'
 require 'modify_game_state'
 require 'check_game_state'
+require 'test_doubles/game_state_storage_gateway_fake'
 
 describe 'Tic Tac Toe' do
-
-  class GameStateStorageGateway
-
-    def save(game)
-      @game_state = game
-    end
-
-    def retrieve
-      @game_state
-    end
-  end
 
   def given_a_new_game
     game_state = [0,0,0,0,0,0,0,0,0]
     store_game_state.execute(game_state)
   end
 
-  let (:game_state_gateway) { GameStateStorageGateway.new }
+  let (:game_state_gateway) { GameStateStorageGatewayFake.new }
   let (:store_game_state) { StoreGameState.new(game_state_gateway: game_state_gateway) }
   let (:retrieve_game_state) { RetrieveGameState.new(game_state_gateway: game_state_gateway) }
   let (:modify_game_state) { ModifyGameState.new(game_state_gateway: game_state_gateway) }
