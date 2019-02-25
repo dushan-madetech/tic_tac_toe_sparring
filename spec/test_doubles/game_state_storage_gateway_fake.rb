@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameStateStorageGatewayFake
   attr_accessor :game_state
 

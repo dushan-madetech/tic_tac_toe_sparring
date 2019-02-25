@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameStateStorageGatewaySpy
   attr_reader :last_game_saved
 
