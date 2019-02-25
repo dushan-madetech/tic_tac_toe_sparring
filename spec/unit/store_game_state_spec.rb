@@ -9,6 +9,11 @@ describe StoreGameState do
     described_class.new(game_state_gateway: game_state_gateway)
   end
 
+  it 'can return true when successfully executed' do
+    game = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    expect(game_state_store.execute(game)).to eq(true)
+  end
+
   it 'can store a game state for an empty board' do
     game = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     game_state_store.execute(game)
