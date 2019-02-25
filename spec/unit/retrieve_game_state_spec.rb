@@ -1,13 +1,7 @@
 require 'retrieve_game_state'
+require 'test_doubles/game_state_storage_gateway_stub'
 
 describe RetrieveGameState do
-  class GameStateStorageGatewayStub
-    attr_writer :game_state
-
-    def retrieve
-      @game_state
-    end
-  end
 
   let (:game_state_gateway) { GameStateStorageGatewayStub.new }
 
