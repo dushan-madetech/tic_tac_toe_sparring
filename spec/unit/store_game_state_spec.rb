@@ -1,13 +1,7 @@
 require 'store_game_state'
+require 'test_doubles/game_state_storage_gateway_spy'
+
 describe StoreGameState do
-
-  class GameStateStorageGatewaySpy
-    attr_reader :last_game_saved
-
-    def save(game)
-      @last_game_saved = game
-    end
-  end
 
   let (:game_state_gateway) {GameStateStorageGatewaySpy.new}
   let (:game_state_store) {StoreGameState.new(game_state_gateway: game_state_gateway)}
