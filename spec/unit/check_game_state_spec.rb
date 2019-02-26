@@ -38,4 +38,19 @@ describe CheckGameState do
     game_state_gateway.game_state = [0, 1, 0, 0, 1, 0, 0, 1, 0]
     expect(check_game_state.execute).to eq('Player one wins')
   end
+
+  it 'can show winner when player one wins from a diagonal' do
+    game_state_gateway.game_state = [1, 0, 0, 0, 1, 0, 0, 0, 1]
+    expect(check_game_state.execute).to eq('Player one wins')
+  end
+
+  it 'can show winner when player two wins from a diagonal' do
+    game_state_gateway.game_state = [2, 0, 0, 0, 2, 0, 0, 0, 2]
+    expect(check_game_state.execute).to eq('Player two wins')
+  end
+
+  it 'can show winner when player one wins from a different diagonal' do
+    game_state_gateway.game_state = [0, 0, 1, 0, 1, 0, 1, 0, 0]
+    expect(check_game_state.execute).to eq('Player one wins')
+  end
 end
