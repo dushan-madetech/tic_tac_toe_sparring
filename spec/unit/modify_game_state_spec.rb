@@ -19,6 +19,10 @@ describe ModifyGameState do
       given_a_new_game
     end
 
+    it 'can return true when successfully executed' do
+      expect(game_state_modify.execute(3, 1)).to eq(true)
+    end
+
     it 'can modify the game state from the starting state' do
       game_state_modify.execute(3, 1)
       last_game = game_state_gateway.game_state
