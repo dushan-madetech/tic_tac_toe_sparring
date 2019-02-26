@@ -42,6 +42,6 @@ describe 'Tic Tac Toe' do
     modify_game_state.execute(1, 1)
     modify_game_state.execute(2, 1)
     modify_game_state.execute(3, 1)
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 end

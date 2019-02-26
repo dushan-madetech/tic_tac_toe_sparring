@@ -11,46 +11,46 @@ describe CheckGameState do
 
   it 'can show when player one wins from a row' do
     game_state_gateway.game_state = [1, 1, 1, 0, 0, 0, 0, 0, 0]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show when player two wins from a row' do
     game_state_gateway.game_state = [2, 2, 2, 0, 0, 0, 0, 0, 0]
-    expect(check_game_state.execute).to eq('Player two wins')
+    expect(check_game_state.execute).to eq(2)
   end
 
   it 'can show winner when player one wins from a different row' do
     game_state_gateway.game_state = [0, 0, 0, 1, 1, 1, 0, 0, 0]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show when player one wins from a column' do
     game_state_gateway.game_state = [1,0,0,1,0,0,1,0,0]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show when player two wins from a column' do
     game_state_gateway.game_state = [2,0,0,2,0,0,2,0,0]
-    expect(check_game_state.execute).to eq('Player two wins')
+    expect(check_game_state.execute).to eq(2)
   end
 
   it 'can show winner when player one wins from a different column' do
     game_state_gateway.game_state = [0, 1, 0, 0, 1, 0, 0, 1, 0]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show winner when player one wins from a diagonal' do
     game_state_gateway.game_state = [1, 0, 0, 0, 1, 0, 0, 0, 1]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show winner when player two wins from a diagonal' do
     game_state_gateway.game_state = [2, 0, 0, 0, 2, 0, 0, 0, 2]
-    expect(check_game_state.execute).to eq('Player two wins')
+    expect(check_game_state.execute).to eq(2)
   end
 
   it 'can show winner when player one wins from a different diagonal' do
     game_state_gateway.game_state = [0, 0, 1, 0, 1, 0, 1, 0, 0]
-    expect(check_game_state.execute).to eq('Player one wins')
+    expect(check_game_state.execute).to eq(1)
   end
 end

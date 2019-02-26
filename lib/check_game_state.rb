@@ -3,59 +3,36 @@
 class CheckGameState
   def initialize(game_state_gateway:)
     @game_state_gateway = game_state_gateway
+    @winning_sets = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [6,4,2]
+    ]
   end
 
   def execute
     board = @game_state_gateway.retrieve
-    return 'Player one wins' if check_winner_from_row == 1 || check_winner_from_column == 1 || check_winner_from_diagonal == 1
-    return 'Player two wins' if check_winner_from_row == 2 || check_winner_from_column == 2 || check_winner_from_diagonal == 2
+    check_for_winner(board)
   end
 
-  def check_winner_from_row
-    board = @game_state_gateway.retrieve
-    row_start_index = 0
+  private
+  
+  def check_for_winner(board)
     winner = 0
-    while row_start_index <= 6 do
-      winner = 1 if row_winner?(board[row_start_index..row_start_index+2],1)
-      winner = 2 if row_winner?(board[row_start_index..row_start_index+2],2)
-      row_start_index += 3
+    @winning_sets.each do |winning_set|
+      winner = 1 if winner?(board.values_at(*winning_set), 1)
+      winner = 2 if winner?(board.values_at(*winning_set), 2)
     end
     winner
   end
 
-  def row_winner?(row, player)
-    return true if row.count(player) == 3
-    false
-  end
-
-  def check_winner_from_column
-    board = @game_state_gateway.retrieve
-    column_start_index = 0
-    winner = 0
-    while column_start_index <= 2 do
-      winner = 1 if column_winner?(board.values_at(column_start_index, column_start_index+3, column_start_index+6),1)
-      winner = 2 if column_winner?(board.values_at(column_start_index, column_start_index+3, column_start_index+6),2)
-      column_start_index += 1
-    end
-    winner
-  end
-
-  def column_winner?(column, player)
-    return true if column.count(player) == 3
-    false
-  end
-
-  def check_winner_from_diagonal
-    board = @game_state_gateway.retrieve
-    column_start_index = 0
-    winner = 0
-    winner = 1 if diagonal_winner?(board.values_at(0,4,8),1) || diagonal_winner?(board.values_at(2,4,6),1)
-    winner = 2 if diagonal_winner?(board.values_at(0,4,8),2) || diagonal_winner?(board.values_at(2,4,6),2)
-    winner
-  end
-
-  def diagonal_winner?(diagonal, player)
-    return true if diagonal.count(player) == 3
+  def winner?(indexes, player)
+    return true if indexes.count(player) == 3
     false
   end
 
