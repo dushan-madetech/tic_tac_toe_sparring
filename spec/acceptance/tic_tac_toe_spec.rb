@@ -3,7 +3,7 @@
 require 'store_game_state'
 require 'retrieve_game_state'
 require 'modify_game_state'
-require 'check_game_state'
+require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 
 describe 'Tic Tac Toe' do
@@ -35,13 +35,13 @@ describe 'Tic Tac Toe' do
   end
 
   it 'can validate if player 1 has won' do
-    check_game_state = CheckGameState.new(
+    determine_outcome = DetermineOutcome.new(
       game_state_gateway: game_state_gateway
     )
     given_a_new_game
     modify_game_state.execute(1, 1)
     modify_game_state.execute(2, 1)
     modify_game_state.execute(3, 1)
-    expect(check_game_state.execute).to eq(1)
+    expect(determine_outcome.execute).to eq(1)
   end
 end
