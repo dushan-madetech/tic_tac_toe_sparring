@@ -53,4 +53,9 @@ describe DetermineOutcome do
     game_state_gateway.game_state = [0, 0, 1, 0, 1, 0, 1, 0, 0]
     expect(determine_outcome.execute).to eq(1)
   end
+
+  it 'can correctly show a draw' do
+    game_state_gateway.game_state = [2, 1, 1, 1, 1, 2, 2, 2, 1]
+    expect(determine_outcome.execute).to eq(3)
+  end 
 end

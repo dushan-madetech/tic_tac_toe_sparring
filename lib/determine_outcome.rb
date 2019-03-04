@@ -17,7 +17,9 @@ class DetermineOutcome
 
   def execute
     board = @game_state_gateway.retrieve
-    check_for_winner(board)
+    winner = check_for_winner(board)
+    winner = 3 if check_for_draw(board) == 9
+    return winner
   end
 
   private
@@ -29,6 +31,10 @@ class DetermineOutcome
       winner = 2 if winner?(board.values_at(*winning_set), 2)
     end
     winner
+  end
+
+  def check_for_draw(board)
+   board.count { |x| x==1 || x==2}
   end
 
   def winner?(indexes, player)
