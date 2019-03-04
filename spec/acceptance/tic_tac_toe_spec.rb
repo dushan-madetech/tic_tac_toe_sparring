@@ -2,7 +2,7 @@
 
 require 'store_game_state'
 require 'retrieve_game_state'
-require 'modify_game_state'
+require 'make_move'
 require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 
@@ -19,8 +19,8 @@ describe 'Tic Tac Toe' do
   let(:retrieve_game_state) do
     RetrieveGameState.new(game_state_gateway: game_state_gateway)
   end
-  let(:modify_game_state) do
-    ModifyGameState.new(game_state_gateway: game_state_gateway)
+  let(:make_move) do
+    MakeMove.new(game_state_gateway: game_state_gateway)
   end
 
   it 'can start a new game' do
@@ -30,7 +30,7 @@ describe 'Tic Tac Toe' do
 
   it 'can allow a player to make a move from a starting state' do
     given_a_new_game
-    modify_game_state.execute(6, 1)
+    make_move.execute(6, 1)
     expect(retrieve_game_state.execute).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
   end
 
@@ -39,9 +39,9 @@ describe 'Tic Tac Toe' do
       game_state_gateway: game_state_gateway
     )
     given_a_new_game
-    modify_game_state.execute(1, 1)
-    modify_game_state.execute(2, 1)
-    modify_game_state.execute(3, 1)
+    make_move.execute(1, 1)
+    make_move.execute(2, 1)
+    make_move.execute(3, 1)
     expect(determine_outcome.execute).to eq(1)
   end
 end
