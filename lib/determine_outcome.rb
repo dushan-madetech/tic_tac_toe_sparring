@@ -34,7 +34,7 @@ class DetermineOutcome
   end
 
   def check_for_draw(board)
-   board.count { |x| x==1 || x==2}
+   board.count { |x| x == 1 || x == 2 }
   end
 
   def winner?(indexes, player)
