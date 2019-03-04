@@ -7,7 +7,7 @@ require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 
 describe 'Tic Tac Toe' do
-  
+
   let(:game_state_gateway) { GameStateStorageGatewayFake.new }
   let(:save_game) do
     SaveGame.new(game_state_gateway: game_state_gateway)
@@ -18,9 +18,9 @@ describe 'Tic Tac Toe' do
   let(:make_move) do
     MakeMove.new(game_state_gateway: game_state_gateway)
   end
-  
+
   def given_a_new_game
-    game_state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    game_state = Array.new(9, 0)
     save_game.execute(game_state)
   end
 
