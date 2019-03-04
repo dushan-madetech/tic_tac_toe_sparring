@@ -45,4 +45,13 @@ describe 'Tic Tac Toe' do
     make_move.execute(3, 1)
     expect(determine_outcome.execute).to eq(1)
   end
+
+  it 'can validate that the game was played to a draw' do
+    determine_outcome = DetermineOutcome.new(
+      game_state_gateway: game_state_gateway
+    )
+    game_state = [2, 1, 1, 1, 1, 2, 2, 2, 1]
+    save_game.execute(game_state)
+    expect(determine_outcome.execute).to eq(3)
+  end
 end
