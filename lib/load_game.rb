@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RetrieveGameState
+class LoadGame
   def initialize(game_state_gateway:)
     @game_state_gateway = game_state_gateway
   end

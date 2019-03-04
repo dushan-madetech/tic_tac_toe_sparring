@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'modify_game_state'
+require 'make_move'
 require 'tile_invalid_error'
 require 'test_doubles/game_state_storage_gateway_fake'
 
-describe ModifyGameState do
+describe MakeMove do
   def given_a_new_game
     game_state_gateway.game_state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   end
