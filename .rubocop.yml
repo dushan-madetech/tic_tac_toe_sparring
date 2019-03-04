@@ -18,3 +18,7 @@ RSpec/DescribeClass:
 
 Style/Documentation:
   Enabled: False
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/check_game_state.rb'

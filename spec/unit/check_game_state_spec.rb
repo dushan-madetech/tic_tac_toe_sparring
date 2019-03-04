@@ -25,12 +25,12 @@ describe CheckGameState do
   end
 
   it 'can show when player one wins from a column' do
-    game_state_gateway.game_state = [1,0,0,1,0,0,1,0,0]
+    game_state_gateway.game_state = [1, 0, 0, 1, 0, 0, 1, 0, 0]
     expect(check_game_state.execute).to eq(1)
   end
 
   it 'can show when player two wins from a column' do
-    game_state_gateway.game_state = [2,0,0,2,0,0,2,0,0]
+    game_state_gateway.game_state = [2, 0, 0, 2, 0, 0, 2, 0, 0]
     expect(check_game_state.execute).to eq(2)
   end
 
