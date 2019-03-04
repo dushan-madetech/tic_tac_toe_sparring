@@ -1,37 +1,38 @@
 # frozen_string_literal: true
 
-require 'store_game_state'
-require 'retrieve_game_state'
+require 'save_game'
+require 'load_game'
 require 'make_move'
 require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 
 describe 'Tic Tac Toe' do
-  def given_a_new_game
-    game_state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    store_game_state.execute(game_state)
-  end
-
+  
   let(:game_state_gateway) { GameStateStorageGatewayFake.new }
-  let(:store_game_state) do
-    StoreGameState.new(game_state_gateway: game_state_gateway)
+  let(:save_game) do
+    SaveGame.new(game_state_gateway: game_state_gateway)
   end
-  let(:retrieve_game_state) do
-    RetrieveGameState.new(game_state_gateway: game_state_gateway)
+  let(:load_game) do
+    LoadGame.new(game_state_gateway: game_state_gateway)
   end
   let(:make_move) do
     MakeMove.new(game_state_gateway: game_state_gateway)
   end
+  
+  def given_a_new_game
+    game_state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    save_game.execute(game_state)
+  end
 
   it 'can start a new game' do
     given_a_new_game
-    expect(retrieve_game_state.execute).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
   end
 
   it 'can allow a player to make a move from a starting state' do
     given_a_new_game
     make_move.execute(6, 1)
-    expect(retrieve_game_state.execute).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
+    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
   end
 
   it 'can validate if player 1 has won' do
