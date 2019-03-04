@@ -19,7 +19,7 @@ class DetermineOutcome
     board = @game_state_gateway.retrieve
     winner = check_for_winner(board)
     winner = 3 if check_for_draw(board) == 9
-    return winner
+    winner
   end
 
   private
