@@ -66,4 +66,17 @@ describe 'Tic Tac Toe' do
     make_move.execute(4, game_state_gateway.retrieve.current_player)
     expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
   end
+
+  it 'can output to user that the game was played to a draw' do
+    determine_outcome = DetermineOutcome.new(
+      game_state_gateway: game_state_gateway
+    )
+
+    game_state = Board.new([2, 1, 1, 1, 1, 2, 2, 2, 1])
+    save_game.execute(game_state)
+
+    ui = UserInterface.new(game_state)
+
+    expect(ui.output_outcome(determine_outcome.execute)).to eq("Draw!")
+  end
 end
