@@ -6,6 +6,7 @@ require 'make_move'
 require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 require 'board'
+require 'user_interface'
 
 describe 'Tic Tac Toe' do
 
