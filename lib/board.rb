@@ -8,10 +8,13 @@ class Board
 
   def grid
     @grid
-  end 
+  end
 
   def current_player
     @current_player
   end
 
+  def swap_player(current_player)
+    current_player == 1 ? @current_player = 2 : @current_player = 1
+  end
 end

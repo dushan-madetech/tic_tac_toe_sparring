@@ -52,9 +52,17 @@ describe 'Tic Tac Toe' do
     determine_outcome = DetermineOutcome.new(
       game_state_gateway: game_state_gateway
     )
-    
+
     game_state = Board.new([2, 1, 1, 1, 1, 2, 2, 2, 1])
     save_game.execute(game_state)
     expect(determine_outcome.execute).to eq(3)
+  end
+
+  it 'can swap player turns on valid moves' do
+    given_a_new_game
+    make_move.execute(6, game_state_gateway.retrieve.current_player)
+    make_move.execute(5, game_state_gateway.retrieve.current_player)
+    make_move.execute(4, game_state_gateway.retrieve.current_player)
+    expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
   end
 end
