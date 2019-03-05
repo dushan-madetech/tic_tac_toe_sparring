@@ -5,6 +5,7 @@ require 'load_game'
 require 'make_move'
 require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
+require 'board'
 
 describe 'Tic Tac Toe' do
 
@@ -20,19 +21,20 @@ describe 'Tic Tac Toe' do
   end
 
   def given_a_new_game
-    game_state = Array.new(9, 0)
+    game_state = Board.new()
+
     save_game.execute(game_state)
   end
 
   it 'can start a new game' do
     given_a_new_game
-    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    expect(load_game.execute.grid).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
   end
 
   it 'can allow a player to make a move from a starting state' do
     given_a_new_game
     make_move.execute(6, 1)
-    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
+    expect(load_game.execute.grid).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
   end
 
   it 'can validate if player 1 has won' do
@@ -50,7 +52,8 @@ describe 'Tic Tac Toe' do
     determine_outcome = DetermineOutcome.new(
       game_state_gateway: game_state_gateway
     )
-    game_state = [2, 1, 1, 1, 1, 2, 2, 2, 1]
+    
+    game_state = Board.new([2, 1, 1, 1, 1, 2, 2, 2, 1])
     save_game.execute(game_state)
     expect(determine_outcome.execute).to eq(3)
   end
