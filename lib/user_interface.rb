@@ -5,6 +5,16 @@ class UserInterface
     draw_grid(board.grid)
   end
 
+  def output_outcome(outcome_code)
+    outcomes = {
+      1 => "Player 1 Wins!",
+      2 => "Player 2 Wins!",
+      3 => "Draw!"
+    }
+    puts outcomes[outcome_code]
+    outcomes[outcome_code]
+  end
+
   private
 
   def draw_grid(grid)
@@ -17,5 +27,11 @@ class UserInterface
       end
     end
     output
+  end
+
+  def request_input
+    puts "please enter the tile number you wish to play in"
+    tile = gets
+    Integer(tile)
   end
 end
