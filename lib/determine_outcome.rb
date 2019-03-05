@@ -27,14 +27,14 @@ class DetermineOutcome
   def check_for_winner(board)
     winner = 0
     @winning_sets.each do |winning_set|
-      winner = 1 if winner?(board.values_at(*winning_set), 1)
-      winner = 2 if winner?(board.values_at(*winning_set), 2)
+      winner = 1 if winner?(board.grid.values_at(*winning_set), 1)
+      winner = 2 if winner?(board.grid.values_at(*winning_set), 2)
     end
     winner
   end
 
   def check_for_draw(board)
-   board.count { |x| x == 1 || x == 2 }
+   board.grid.count { |x| x == 1 || x == 2 }
   end
 
   def winner?(indexes, player)

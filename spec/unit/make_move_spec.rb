@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require 'make_move'
+require 'board'
 require 'tile_invalid_error'
 require 'test_doubles/game_state_storage_gateway_fake'
 
 describe MakeMove do
   def given_a_new_game
-    game_state_gateway.game_state = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    board = Board.new([0, 0, 0, 0, 0, 0, 0, 0, 0], 1)
+    game_state_gateway.game_state = board
   end
 
   let(:game_state_gateway) { GameStateStorageGatewayFake.new }
@@ -26,21 +28,21 @@ describe MakeMove do
     it 'can modify the game state from the starting state' do
       game_state_modify.execute(3, 1)
       last_game = game_state_gateway.game_state
-      expect(last_game).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
+      expect(last_game.grid).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
     end
 
     it 'can modify the game state twice in row' do
       game_state_modify.execute(3, 1)
       game_state_modify.execute(4, 2)
       last_game = game_state_gateway.game_state
-      expect(last_game).to eq([0, 0, 1, 2, 0, 0, 0, 0, 0])
+      expect(last_game.grid).to eq([0, 0, 1, 2, 0, 0, 0, 0, 0])
     end
 
     it 'can prevent a move on an occupied tile' do
       game_state_modify.execute(3, 1)
       game_state_modify.execute(3, 2)
       last_game = game_state_gateway.game_state
-      expect(last_game).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
+      expect(last_game.grid).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
     end
   end
 
