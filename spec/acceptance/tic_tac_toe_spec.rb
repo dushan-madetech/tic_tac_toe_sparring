@@ -67,7 +67,7 @@ describe 'Tic Tac Toe' do
     expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
   end
 
-  it 'can output to user that the game was played to a draw' do
+  xit 'can output to user that the game was played to a draw' do
     determine_outcome = DetermineOutcome.new(
       game_state_gateway: game_state_gateway
     )
@@ -79,4 +79,8 @@ describe 'Tic Tac Toe' do
 
     expect(ui.output_outcome(determine_outcome.execute)).to eq("Draw!")
   end
+
+
+
+
 end

@@ -1,9 +1,32 @@
 
+require './make_move'
+require './determine_outcome'
+require './board'
+require '../spec/test_doubles/game_state_storage_gateway_fake'
+require './save_game'
+
 
 class UserInterface
-  def initialize(board)
-    draw_grid(board.grid)
+  def initialize(board_gateway)
+    @board_gateway = board_gateway
+    @make_move = MakeMove.new(game_state_gateway: @board_gateway)
+    @determine_outcome = DetermineOutcome.new(game_state_gateway: @board_gateway)
   end
+  
+  def execute
+   
+    while(@determine_outcome.execute == 0) do
+      board = @board_gateway.retrieve
+      puts draw_grid(board.grid)
+      @make_move.execute(request_input, board.current_player)
+    end
+    puts draw_grid(board.grid)
+    output_outcome(@determine_outcome.execute)
+  end
+
+
+
+  private
 
   def output_outcome(outcome_code)
     outcomes = {
@@ -14,8 +37,6 @@ class UserInterface
     puts outcomes[outcome_code]
     outcomes[outcome_code]
   end
-
-  private
 
   def draw_grid(grid)
     output = "\n\n"
@@ -35,3 +56,9 @@ class UserInterface
     Integer(tile)
   end
 end
+board_storage = GameStateStorageGatewayFake.new
+board_storage.save(Board.new)
+
+ui = UserInterface.new(board_storage)
+ui.execute
+
