@@ -36,7 +36,7 @@ class UserInterface
   end
 
   def draw_grid(grid)
-    output = "\n\n"
+    output = "\n"
     0.upto(grid.length - 1) do |position|
       output << (grid[position] || position).to_s
       case position % 3
@@ -44,12 +44,11 @@ class UserInterface
       when 2 then output << "\n-----------\n" unless position == grid.length - 1
       end
     end
-    output << "\n"
-    output
+    output << "\n\n"
   end
 
   def request_input
-    puts "\nplease enter the tile number you wish to play in"
+    print 'Please enter the tile number you wish to play in: '
     tile = gets
     Integer(tile)
   end
