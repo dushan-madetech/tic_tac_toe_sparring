@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'load_game'
-require 'test_doubles/game_state_storage_gateway_stub'
+require 'gateway/game_state_storage_gateway_stub'
 
 describe LoadGame do
   let(:game_state_gateway) { GameStateStorageGatewayStub.new }
