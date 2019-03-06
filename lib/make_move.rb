@@ -10,7 +10,7 @@ class MakeMove
 
     old_board = @game_state_gateway.retrieve
     new_board = old_board
-    if (new_board.grid[tile - 1]).zero?
+    if new_board.grid[tile - 1].zero?
       new_board.grid[tile - 1] = player
       new_board.swap_player(player)
     end

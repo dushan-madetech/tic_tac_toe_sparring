@@ -4,7 +4,7 @@ require 'save_game'
 require 'load_game'
 require 'make_move'
 require 'determine_outcome'
-require 'test_doubles/game_state_storage_gateway_fake'
+require 'gateway/game_state_storage_gateway_fake'
 require 'board'
 
 describe 'Tic Tac Toe' do
@@ -20,7 +20,7 @@ describe 'Tic Tac Toe' do
   end
 
   def given_a_new_game
-    game_state = Board.new()
+    game_state = Board.new
 
     save_game.execute(game_state)
   end
