@@ -18,3 +18,6 @@ class MakeMove
     true
   end
 end
+
+class TileInvalidError < StandardError
+end

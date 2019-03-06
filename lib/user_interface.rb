@@ -17,7 +17,11 @@ class UserInterface
     while @determine_outcome.execute.zero?
       board = @board_gateway.retrieve
       puts draw_grid(board.grid)
-      @make_move.execute(request_input, board.current_player)
+      begin
+        @make_move.execute(request_input, board.current_player)
+      rescue TileInvalidError
+        puts "\nTILE OUT OF BOUNDS!!! Choose a tile between 1 and 9!"
+      end
     end
     puts draw_grid(board.grid)
     output_outcome(@determine_outcome.execute)
@@ -41,14 +45,14 @@ class UserInterface
       output << (grid[position] || position).to_s
       case position % 3
       when 0, 1 then output << ' | '
-      when 2 then output << "\n-----------\n" unless position == grid.length - 1
+      when 2 then output << "\n----------\n" unless position == grid.length - 1
       end
     end
     output << "\n\n"
   end
 
   def request_input
-    print 'Please enter the tile number you wish to play in: '
+    print "Player #{@board_gateway.retrieve.current_player}, please enter the tile number you wish to play in: "
     tile = gets
     Integer(tile)
   end
