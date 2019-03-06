@@ -6,10 +6,8 @@ require 'make_move'
 require 'determine_outcome'
 require 'test_doubles/game_state_storage_gateway_fake'
 require 'board'
-require 'user_interface'
 
 describe 'Tic Tac Toe' do
-
   let(:game_state_gateway) { GameStateStorageGatewayFake.new }
   let(:save_game) do
     SaveGame.new(game_state_gateway: game_state_gateway)
@@ -66,21 +64,4 @@ describe 'Tic Tac Toe' do
     make_move.execute(4, game_state_gateway.retrieve.current_player)
     expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
   end
-
-  xit 'can output to user that the game was played to a draw' do
-    determine_outcome = DetermineOutcome.new(
-      game_state_gateway: game_state_gateway
-    )
-
-    game_state = Board.new([2, 1, 1, 1, 1, 2, 2, 2, 1])
-    save_game.execute(game_state)
-
-    ui = UserInterface.new(game_state)
-
-    expect(ui.output_outcome(determine_outcome.execute)).to eq("Draw!")
-  end
-
-
-
-
 end

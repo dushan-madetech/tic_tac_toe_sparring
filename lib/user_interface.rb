@@ -1,8 +1,8 @@
-require 'make_move'
-require 'determine_outcome'
-require 'board'
+require_relative 'make_move'
+require_relative 'determine_outcome'
+require_relative 'board'
 # require 'spec/test_doubles/game_state_storage_gateway_fake'
-require 'save_game'
+require_relative 'save_game'
 
 class GameStateStorageGatewayFake
   attr_accessor :game_state
