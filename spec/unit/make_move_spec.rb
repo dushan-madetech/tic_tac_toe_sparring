@@ -7,7 +7,7 @@ require 'gateway/game_state_storage_gateway_fake'
 
 describe MakeMove do
   def given_a_new_game
-    board = Board.new([0, 0, 0, 0, 0, 0, 0, 0, 0], 1)
+    board = Board.new
     game_state_gateway.game_state = board
   end
 

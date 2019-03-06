@@ -6,7 +6,7 @@ class MakeMove
   end
 
   def execute(tile, player)
-    raise TileInvalidError, 'Tile out of bounds' if tile >= 10
+    raise TileInvalidError, 'Tile out of bounds' if tile <= 0 || tile >= 10
 
     old_board = @game_state_gateway.retrieve
     new_board = old_board
