@@ -22,3 +22,7 @@ Style/Documentation:
 Metrics/MethodLength:
   Exclude:
     - 'lib/check_game_state.rb'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'lib/user_interface.rb'

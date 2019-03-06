@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'save_game'
-require 'test_doubles/game_state_storage_gateway_spy'
+require 'gateway/game_state_storage_gateway_spy'
 
 describe SaveGame do
   let(:game_state_gateway) { GameStateStorageGatewaySpy.new }
