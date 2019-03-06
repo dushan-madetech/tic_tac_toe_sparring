@@ -1,10 +1,20 @@
+require 'make_move'
+require 'determine_outcome'
+require 'board'
+# require 'spec/test_doubles/game_state_storage_gateway_fake'
+require 'save_game'
 
-require './make_move'
-require './determine_outcome'
-require './board'
-require '../spec/test_doubles/game_state_storage_gateway_fake'
-require './save_game'
+class GameStateStorageGatewayFake
+  attr_accessor :game_state
 
+  def save(game)
+    @game_state = game
+  end
+
+  def retrieve
+    @game_state.dup
+  end
+end
 
 class UserInterface
   def initialize(board_gateway)
@@ -51,7 +61,7 @@ class UserInterface
   end
 
   def request_input
-    puts "please enter the tile number you wish to play in"
+    puts 'please enter the tile number you wish to play in'
     tile = gets
     Integer(tile)
   end
