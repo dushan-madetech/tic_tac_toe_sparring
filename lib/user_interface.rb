@@ -52,7 +52,8 @@ class UserInterface
   end
 
   def request_input
-    print "Player #{@board_gateway.retrieve.current_player}, please enter the tile number you wish to play in: "
+    print "Player #{@board_gateway.retrieve.current_player}, " \
+          'please enter the tile number you wish to play in: '
     tile = gets
     Integer(tile)
   end
