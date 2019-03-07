@@ -18,23 +18,21 @@ describe 'Tic Tac Toe' do
   let(:make_move) do
     MakeMove.new(game_state_gateway: game_state_gateway)
   end
-  # let(:current_player) { game_state_gateway.retrieve.current_player }
 
   def given_a_new_game
     game_state = Board.new
-
     save_game.execute(game_state)
   end
 
   it 'can start a new game' do
     given_a_new_game
-    expect(load_game.execute.grid).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
+    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 0, 0, 0, 0])
   end
 
   it 'can allow a player to make a move from a starting state' do
     given_a_new_game
     make_move.execute(6, 1)
-    expect(load_game.execute.grid).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
+    expect(load_game.execute).to eq([0, 0, 0, 0, 0, 1, 0, 0, 0])
   end
 
   it 'can validate if player 1 has won' do
@@ -58,16 +56,11 @@ describe 'Tic Tac Toe' do
     expect(determine_outcome.execute).to eq(3)
   end
 
-  it 'can swap player turns on valid moves' do
+  xit 'can swap player turns on valid moves' do
     given_a_new_game
     make_move.execute(6, game_state_gateway.retrieve.current_player)
     make_move.execute(5, game_state_gateway.retrieve.current_player)
     make_move.execute(4, game_state_gateway.retrieve.current_player)
-    expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
-  end
-
-  it 'can play a full game to win' do
-    given_a_new_game
-    make_move
+    expect(load_game.execute).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
   end
 end
