@@ -19,8 +19,8 @@ class UserInterface
       puts draw_grid(board.grid)
       begin
         @make_move.execute(request_input, board.current_player)
-      rescue TileInvalidError
-        puts "\nTILE OUT OF BOUNDS!!! Choose a tile between 1 and 9!"
+      rescue IndexError, ArgumentError
+        puts "\nValid mark required. Choose a tile between 1 and 9!"
       end
     end
     puts draw_grid(board.grid)
@@ -36,7 +36,6 @@ class UserInterface
       3 => 'Draw!'
     }
     puts outcomes[outcome_code]
-    outcomes[outcome_code]
   end
 
   def draw_grid(grid)
@@ -58,6 +57,7 @@ class UserInterface
     Integer(tile)
   end
 end
+
 board_storage = GameStateStorageGatewayFake.new
 board_storage.save(Board.new)
 

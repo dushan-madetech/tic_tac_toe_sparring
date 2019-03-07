@@ -6,18 +6,17 @@ class MakeMove
   end
 
   def execute(tile, player)
-    raise TileInvalidError, 'Tile out of bounds' if tile <= 0 || tile >= 10
+    board = @game_state_gateway.retrieve
 
-    old_board = @game_state_gateway.retrieve
-    new_board = old_board
-    if new_board.grid[tile - 1].zero?
-      new_board.grid[tile - 1] = player
-      new_board.swap_player(player)
+    raise IndexError, 'Tile out of bounds' unless tile.between?(
+      1, board.grid.length
+    )
+
+    if board.grid[tile - 1].zero?
+      board.grid[tile - 1] = player
+      board.swap_player(player)
     end
-    @game_state_gateway.save(new_board)
+    @game_state_gateway.save(board)
     true
   end
-end
-
-class TileInvalidError < StandardError
 end

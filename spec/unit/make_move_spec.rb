@@ -2,7 +2,6 @@
 
 require 'make_move'
 require 'board'
-require 'tile_invalid_error'
 require 'gateway/game_state_storage_gateway_fake'
 
 describe MakeMove do
@@ -44,15 +43,11 @@ describe MakeMove do
       last_game = game_state_gateway.game_state
       expect(last_game.grid).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
     end
-  end
 
-  it 'can prevent an invalid move (invalid tile number given)' do
-    game_state_gateway = GameStateStorageGatewayFake.new
-    game_state_modify = described_class.new(
-      game_state_gateway: game_state_gateway
-    )
-    expect do
-      game_state_modify.execute(10, 1)
-    end.to raise_exception(TileInvalidError, 'Tile out of bounds')
+    it 'can prevent an invalid move (invalid tile number given)' do
+      expect do
+        game_state_modify.execute(10, 1)
+      end.to raise_exception(IndexError, 'Tile out of bounds')
+    end
   end
 end
