@@ -18,6 +18,7 @@ describe 'Tic Tac Toe' do
   let(:make_move) do
     MakeMove.new(game_state_gateway: game_state_gateway)
   end
+  # let(:current_player) { game_state_gateway.retrieve.current_player }
 
   def given_a_new_game
     game_state = Board.new
@@ -63,5 +64,10 @@ describe 'Tic Tac Toe' do
     make_move.execute(5, game_state_gateway.retrieve.current_player)
     make_move.execute(4, game_state_gateway.retrieve.current_player)
     expect(load_game.execute.grid).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
+  end
+
+  it 'can play a full game to win' do
+    given_a_new_game
+    make_move
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'determine_outcome'
-require 'gateway/game_state_storage_gateway_stub'
+require 'test_double/game_state_storage_gateway_stub'
 require 'board'
 
 describe DetermineOutcome do

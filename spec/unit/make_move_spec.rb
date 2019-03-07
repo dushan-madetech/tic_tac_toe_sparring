@@ -39,15 +39,15 @@ describe MakeMove do
 
     it 'can prevent a move on an occupied tile' do
       game_state_modify.execute(3, 1)
-      game_state_modify.execute(3, 2)
-      last_game = game_state_gateway.game_state
-      expect(last_game.grid).to eq([0, 0, 1, 0, 0, 0, 0, 0, 0])
+      expect do
+        game_state_modify.execute(3, 2)
+      end.to raise_error(OccupiedError, 'Cannot make the same move twice')
     end
 
     it 'can prevent an invalid move (invalid tile number given)' do
       expect do
         game_state_modify.execute(10, 1)
-      end.to raise_exception(IndexError, 'Tile out of bounds')
+      end.to raise_error(IndexError, 'Tile out of bounds')
     end
   end
 end

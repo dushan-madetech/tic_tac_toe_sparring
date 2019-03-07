@@ -21,6 +21,8 @@ class UserInterface
         @make_move.execute(request_input, board.current_player)
       rescue IndexError, ArgumentError
         puts "\nValid mark required. Choose a tile between 1 and 9!"
+      rescue OccupiedError
+        puts "\nCannot place mark on occupied tile!"
       end
     end
     puts draw_grid(board.grid)
