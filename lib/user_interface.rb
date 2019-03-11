@@ -17,7 +17,7 @@ class UserInterface
     while @determine_outcome.execute.zero?
       board = @board_gateway.retrieve
       puts draw_grid(board.grid)
-      exceptionhandle
+      validation(@make_move.execute(request_input))
     end
     puts draw_grid(board.grid)
     output_outcome(@determine_outcome.execute)
@@ -25,13 +25,21 @@ class UserInterface
 
   private
 
-  def exceptionhandle
-    @make_move.execute(request_input)
-  rescue IndexError, ArgumentError
-    puts "\nValid mark required. Choose a tile between 1 and 9!"
-  rescue OccupiedError
-    puts "\nCannot place mark on occupied tile!"
+  def validation(error)
+    case error
+    when :invalid
+      puts "\nValid tile number required. Choose a tile between 1 and 9!"
+    when :occupied
+      puts "\nCannot place mark on occupied tile!"
+    end
   end
+
+  #   @make_move.execute(request_input)
+  # rescue IndexError, ArgumentError
+  #   puts "\nValid mark required. Choose a tile between 1 and 9!"
+  # rescue OccupiedError
+  #   puts "\nCannot place mark on occupied tile!"
+  # end
 
   def output_outcome(outcome_code)
     outcomes = {
@@ -58,10 +66,15 @@ class UserInterface
     print "Player #{@board_gateway.retrieve.current_player}, " \
           'please enter the tile number you wish to play in: '
     tile = gets
-    Integer(tile)
+    letters = tile.chomp.scan(/\D/)
+    if letters.length >= 1
+      tile = -1
+    else
+      tile.to_i
+    end
   end
 end
-  
+
 board_storage = GameStateStorageGatewayFake.new
 board_storage.save(Board.new)
 

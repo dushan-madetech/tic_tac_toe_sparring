@@ -35,23 +35,19 @@ describe MakeMove do
     end
 
     it 'can swap the current player after a successful move' do
-      make_move.execute(3)
       make_move.execute(4)
+      make_move.execute(5)
       last_game = game_state_gateway.retrieve
-      expect(last_game.grid).to eq([0, 0, 1, 2, 0, 0, 0, 0, 0])
+      expect(last_game.grid).to eq([0, 0, 0, 1, 2, 0, 0, 0, 0])
     end
 
     it 'can prevent a move on an occupied tile' do
       make_move.execute(3)
-      expect do
-        make_move.execute(3)
-      end.to raise_error(OccupiedError, 'Cannot make the same move twice')
+      expect(make_move.execute(3)).to eq(:occupied)
     end
 
     it 'can prevent an invalid move (invalid tile number given)' do
-      expect do
-        make_move.execute(10)
-      end.to raise_error(IndexError, 'Tile out of bounds')
+      expect(make_move.execute(10)).to eq(:invalid)
     end
   end
 end
