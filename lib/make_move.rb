@@ -19,12 +19,14 @@ class MakeMove
     @game_state_gateway.save(board)
     true
   end
-end
 
-def check_mark_within_bounds(tile, board)
-  raise IndexError, 'Tile out of bounds' unless tile.between?(
-    1, board.grid.length
-  )
+  private
+
+  def check_mark_within_bounds(tile, board)
+    raise IndexError, 'Tile out of bounds' unless tile.between?(
+      1, board.grid.length
+    )
+  end
 end
 
 class OccupiedError < StandardError
