@@ -39,7 +39,7 @@ class UserInterface
     }
     puts outcomes[outcome_code]
   end
-
+  
   def draw_grid(grid)
     output = "\n"
     0.upto(grid.length - 1) do |position|
@@ -59,7 +59,7 @@ class UserInterface
     Integer(tile)
   end
 end
-
+  
 board_storage = GameStateStorageGatewayFake.new
 board_storage.save(Board.new)
 
