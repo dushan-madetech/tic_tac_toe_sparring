@@ -34,13 +34,6 @@ class UserInterface
     end
   end
 
-  #   @make_move.execute(request_input)
-  # rescue IndexError, ArgumentError
-  #   puts "\nValid mark required. Choose a tile between 1 and 9!"
-  # rescue OccupiedError
-  #   puts "\nCannot place mark on occupied tile!"
-  # end
-
   def output_outcome(outcome_code)
     outcomes = {
       1 => 'Player 1 Wins!',
