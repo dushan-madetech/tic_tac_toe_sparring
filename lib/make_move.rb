@@ -5,16 +5,22 @@ class MakeMove
     @game_state_gateway = game_state_gateway
   end
 
-  def execute(tile, player)
-    raise TileInvalidError, 'Tile out of bounds' if tile <= 0 || tile >= 10
+  def execute(tile)
+    board = @game_state_gateway.retrieve
+    player = board.current_player
+    # check_mark_within_bounds(tile, board)
 
-    old_board = @game_state_gateway.retrieve
-    new_board = old_board
-    if new_board.grid[tile - 1].zero?
-      new_board.grid[tile - 1] = player
-      new_board.swap_player(player)
+    unless tile.between?(1, board.grid.length)
+      return :invalid
     end
-    @game_state_gateway.save(new_board)
+
+    if board.grid[tile - 1].zero?
+      board.grid[tile - 1] = player
+      board.swap_player
+    else
+      return :occupied
+    end
+    @game_state_gateway.save(board)
     true
   end
 end

@@ -6,6 +6,6 @@ class LoadGame
   end
 
   def execute
-    @game_state_gateway.retrieve
+    @game_state_gateway.retrieve.grid
   end
 end
