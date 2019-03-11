@@ -18,7 +18,7 @@ class UserInterface
       board = @board_gateway.retrieve
       puts draw_grid(board.grid)
       begin
-        @make_move.execute(request_input, board.current_player)
+        @make_move.execute(request_input)
       rescue IndexError, ArgumentError
         puts "\nValid mark required. Choose a tile between 1 and 9!"
       rescue OccupiedError

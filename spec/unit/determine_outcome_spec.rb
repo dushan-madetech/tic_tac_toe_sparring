@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'determine_outcome'
-require 'test_double/game_state_storage_gateway_stub'
-require 'board'
-
 describe DetermineOutcome do
   let(:game_state_gateway) { GameStateStorageGatewayStub.new }
   let(:determine_outcome) do

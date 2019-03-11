@@ -5,13 +5,14 @@ class MakeMove
     @game_state_gateway = game_state_gateway
   end
 
-  def execute(tile, player)
+  def execute(tile)
     board = @game_state_gateway.retrieve
+    player = board.current_player
     check_mark_within_bounds(tile, board)
 
     if board.grid[tile - 1].zero?
       board.grid[tile - 1] = player
-      board.swap_player(player)
+      board.swap_player
     else
       raise OccupiedError, 'Cannot make the same move twice'
     end
