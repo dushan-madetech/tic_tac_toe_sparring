@@ -61,7 +61,7 @@ class UserInterface
     tile = gets
     letters = tile.chomp.scan(/\D/)
     if letters.length >= 1
-      tile = -1
+      -1
     else
       tile.to_i
     end

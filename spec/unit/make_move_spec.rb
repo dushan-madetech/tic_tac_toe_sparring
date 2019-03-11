@@ -5,7 +5,7 @@ describe MakeMove do
   let(:make_move) do
     described_class.new(game_state_gateway: game_state_gateway)
   end
-  let(:current_player) {game_state_gateway.retrieve.current_player}
+  let(:current_player) { game_state_gateway.retrieve.current_player }
 
   def given_a_new_game
     board = Board.new

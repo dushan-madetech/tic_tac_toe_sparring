@@ -58,7 +58,6 @@ describe 'Tic Tac Toe' do
 
   it 'can swap player turns on valid moves' do
     given_a_new_game
-    player = game_state_gateway.retrieve.current_player
     make_move.execute(6)
     make_move.execute(5)
     make_move.execute(4)
