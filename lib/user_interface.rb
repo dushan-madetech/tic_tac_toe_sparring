@@ -17,19 +17,21 @@ class UserInterface
     while @determine_outcome.execute.zero?
       board = @board_gateway.retrieve
       puts draw_grid(board.grid)
-      begin
-        @make_move.execute(request_input)
-      rescue IndexError, ArgumentError
-        puts "\nValid mark required. Choose a tile between 1 and 9!"
-      rescue OccupiedError
-        puts "\nCannot place mark on occupied tile!"
-      end
+      exceptionhandle
     end
     puts draw_grid(board.grid)
     output_outcome(@determine_outcome.execute)
   end
 
   private
+
+  def exceptionhandle
+    @make_move.execute(request_input)
+  rescue IndexError, ArgumentError
+    puts "\nValid mark required. Choose a tile between 1 and 9!"
+  rescue OccupiedError
+    puts "\nCannot place mark on occupied tile!"
+  end
 
   def output_outcome(outcome_code)
     outcomes = {
@@ -39,7 +41,7 @@ class UserInterface
     }
     puts outcomes[outcome_code]
   end
-  
+
   def draw_grid(grid)
     output = "\n"
     0.upto(grid.length - 1) do |position|
