@@ -1,8 +1,8 @@
 require_relative 'gateway/game_state_storage_gateway_fake'
-require_relative 'make_move'
-require_relative 'determine_outcome'
-require_relative 'board'
-require_relative 'save_game'
+require_relative 'use_case/make_move'
+require_relative 'use_case/determine_outcome'
+require_relative 'domain/board'
+require_relative 'use_case/save_game'
 
 class UserInterface
   def initialize(board_gateway)

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'save_game'
-require 'load_game'
-require 'make_move'
-require 'determine_outcome'
+require 'use_case/save_game'
+require 'use_case/load_game'
+require 'use_case/make_move'
+require 'use_case/determine_outcome'
 require 'gateway/game_state_storage_gateway_fake'
-require 'board'
+require 'domain/board'
 require 'test_double/game_state_storage_gateway_spy'
 require 'test_double/game_state_storage_gateway_stub'
 
