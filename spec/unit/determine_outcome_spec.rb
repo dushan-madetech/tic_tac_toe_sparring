@@ -7,7 +7,6 @@ describe DetermineOutcome do
   end
 
   it 'can show when player one wins from a row' do
-    Board.new([1, 1, 1, 0, 0, 0, 0, 0, 0], 1)
     game_state_gateway.game_state = Board.new([1, 1, 1, 0, 0, 0, 0, 0, 0])
     expect(determine_outcome.execute).to eq(1)
   end

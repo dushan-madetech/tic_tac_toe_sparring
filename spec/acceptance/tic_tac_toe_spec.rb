@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require 'domain/board'
+require 'use_case/ai_response'
 require 'use_case/save_game'
 require 'use_case/load_game'
 require 'use_case/make_move'
 require 'use_case/determine_outcome'
 require 'gateway/game_state_storage_gateway_fake'
-require 'domain/board'
 require 'test_double/game_state_storage_gateway_spy'
 require 'test_double/game_state_storage_gateway_stub'
 
@@ -62,5 +63,20 @@ describe 'Tic Tac Toe' do
     make_move.execute(5)
     make_move.execute(4)
     expect(load_game.execute).to eq([0, 0, 0, 1, 2, 1, 0, 0, 0])
+  end
+
+  it 'can play to a draw against AI' do
+    given_a_new_game
+    ai_response = AIResponse.new
+    make_move.execute(5)
+    ai_response.execute(game_state_gateway.game_state)
+    make_move.execute(2)
+    ai_response.execute(game_state_gateway.game_state)
+    make_move.execute(7)
+    ai_response.execute(game_state_gateway.game_state)
+    make_move.execute(6)
+    ai_response.execute(game_state_gateway.game_state)
+    make_move.execute(9)
+    expect(determine_outcome.execute).to eq(3)
   end
 end
