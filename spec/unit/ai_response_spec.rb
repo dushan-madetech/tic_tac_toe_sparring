@@ -12,5 +12,10 @@ describe AIResponse do
       game_state_gateway.game_state = [0, 2, 1, 0, 2, 0, 0, 0, 1]
       expect(ai_response.execute(game_state_gateway.game_state)).to eq(6)
     end
+
+    it 'can win in one move example three' do
+      game_state_gateway.game_state = [0, 0, 1, 0, 0, 2, 1, 0, 2]
+      expect(ai_response.execute(game_state_gateway.game_state)).to eq(5)
+    end
   end
 end
