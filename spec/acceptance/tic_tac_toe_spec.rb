@@ -68,14 +68,15 @@ describe 'Tic Tac Toe' do
   it 'can play to a draw against AI' do
     given_a_new_game
     ai_response = AIResponse.new
+    board = game_state_gateway.retrieve.grid
     make_move.execute(5)
-    ai_response.execute(game_state_gateway.game_state)
+    ai_response.execute(board)
     make_move.execute(2)
-    ai_response.execute(game_state_gateway.game_state)
+    ai_response.execute(board)
     make_move.execute(7)
-    ai_response.execute(game_state_gateway.game_state)
+    ai_response.execute(board)
     make_move.execute(6)
-    ai_response.execute(game_state_gateway.game_state)
+    ai_response.execute(board)
     make_move.execute(9)
     expect(determine_outcome.execute).to eq(3)
   end
